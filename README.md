@@ -1,5 +1,67 @@
 # Learn Data Quality with Great Expectations
 
+A minimal guide: clone the repo and run one script to see data validation using Great Expectations.
+
+## Quick start (copy & paste)
+
+```bash
+git clone https://github.com/trijuhari/learn-data-quality-using-great-expectations.git
+cd learn-data-quality-using-great-expectations
+chmod +x scripts/*.sh
+./scripts/setup.sh
+```
+
+To clean up:
+
+```bash
+./scripts/clean.sh
+```
+
+## What the setup does
+
+- Starts a PostgreSQL container (`pg_local`) (uses `docker compose` if available, otherwise `docker run`)
+- Generates sample data and loads schema
+- Installs Python dependencies and runs `src/examples/simple_ge_example.py`
+
+## Manual steps (if needed)
+
+Start DB only:
+
+```bash
+docker run -d --name pg_local -p 5432:5432 \
+  -e POSTGRES_USER=sde -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=data_quality \
+  -v postgres_data:/var/lib/postgresql/data \
+  postgres:12.2
+```
+
+Load data:
+
+```bash
+python3 scripts/generate_data.py
+cat sql/setup_db.sql sql/seed_data.sql | docker exec -i pg_local psql -U sde -d data_quality
+```
+
+Run validation:
+
+```bash
+python3 src/examples/simple_ge_example.py
+```
+
+## Database credentials
+
+User: `sde`  Password: `password`  DB: `data_quality`  Port: `5432`
+
+## Troubleshooting
+
+- If you see "Connection refused": wait a few seconds and retry `./scripts/setup.sh` or run `sleep 10` before validation.
+- If port 5432 is in use: stop the conflicting container (`docker ps` then `docker stop <container>`).
+- To reset: `./scripts/clean.sh` then `./scripts/setup.sh`.
+
+---
+MIT — use for learning.
+# Learn Data Quality with Great Expectations
+
 A minimal, clean guide to clone and run the project locally.
 
 ## Quick Start (copy & paste)
