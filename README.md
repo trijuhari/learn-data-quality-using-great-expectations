@@ -1,5 +1,76 @@
 # Learn Data Quality with Great Expectations
 
+A minimal, clean guide to clone and run the project locally.
+
+## Quick Start (copy & paste)
+
+```bash
+# 1) Clone
+git clone https://github.com/trijuhari/learn-data-quality-using-great-expectations.git
+cd learn-data-quality-using-great-expectations
+
+# 2) Make helper scripts executable (first time only)
+chmod +x scripts/*.sh
+
+# 3) Run automated setup (starts DB, loads data, installs deps, runs validation)
+./scripts/setup.sh
+```
+
+If you need to clean up afterwards:
+
+```bash
+./scripts/clean.sh
+```
+
+## What the scripts do
+
+- Start a PostgreSQL container (`pg_local`) using `docker compose` (if available) or `docker run` fallback
+- Generate 1000 sample rows and load schema + data
+- Install Python dependencies and run the example Great Expectations validation
+
+## Manual commands (if you prefer step-by-step)
+
+Start DB only (manual):
+```bash
+docker run -d --name pg_local -p 5432:5432 \
+  -e POSTGRES_USER=sde -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=data_quality \
+  -v postgres_data:/var/lib/postgresql/data \
+  postgres:12.2
+```
+
+Generate fresh data & load schema:
+```bash
+python3 scripts/generate_data.py
+cat sql/setup_db.sql sql/seed_data.sql | docker exec -i pg_local psql -U sde -d data_quality
+```
+
+Run validation:
+```bash
+python3 src/examples/simple_ge_example.py
+```
+
+## Database credentials
+
+```
+User:     sde
+Password: password
+Database: data_quality
+Host:     localhost
+Port:     5432
+```
+
+## Troubleshooting
+
+- If you get "Connection refused", wait a few seconds and re-run `./scripts/setup.sh` or run `sleep 10` then retry the validation.
+- If port 5432 is in use, stop any existing container using that port: `docker ps` then `docker stop <container>`.
+- To reset completely: `./scripts/clean.sh` and then `./scripts/setup.sh`.
+
+## License
+
+MIT — use this for learning.
+# Learn Data Quality with Great Expectations
+
 A simple guide to learning data quality validation using Great Expectations, PostgreSQL, and Docker.
 
 
