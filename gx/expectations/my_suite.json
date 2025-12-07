@@ -1,7 +1,7 @@
 {
   "expectations": [
     {
-      "id": "87091f58-2cab-4703-be7c-eef143fea81b",
+      "id": "a24fcf9d-bcc3-4be3-b568-544c79f773e6",
       "kwargs": {
         "value": 1000
       },
@@ -10,7 +10,7 @@
       "type": "expect_table_row_count_to_equal"
     },
     {
-      "id": "225e7e2d-a275-43aa-949d-d8b6937c22f5",
+      "id": "34ca85d1-16f1-4520-9c5d-f0ff8fc29969",
       "kwargs": {
         "column": "order_id"
       },
@@ -19,7 +19,7 @@
       "type": "expect_column_values_to_not_be_null"
     },
     {
-      "id": "f28c4fcd-842c-47e0-8a5b-6efe6ec89e88",
+      "id": "c8bd8ae7-16b6-4046-b581-5d2a58b9c359",
       "kwargs": {
         "column": "order_status",
         "value_set": [
@@ -34,7 +34,7 @@
       "type": "expect_column_values_to_be_in_set"
     }
   ],
-  "id": "ada1c536-0cd8-4fce-8b02-ed7434046390",
+  "id": "ae7e08b7-3c6e-417d-a4e1-3c92ce12e3d8",
   "meta": {
     "great_expectations_version": "1.9.2"
   },
