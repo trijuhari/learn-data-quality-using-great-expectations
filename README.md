@@ -2,9 +2,6 @@
 
 A simple guide to learning data quality validation using Great Expectations, PostgreSQL, and Docker.
 
-## ⚡ Quick Start (2 Minutes)
-
-Copy and paste this:
 
 ```bash
 # Start database
@@ -24,8 +21,6 @@ cat sql/setup_db.sql sql/seed_data.sql | docker exec -i pg_local psql -U sde -d 
 pip install -r requirements.txt
 python3 src/examples/simple_ge_example.py
 ```
-
-✅ Done! You should see data quality validation results.
 
 ## What is this?
 
