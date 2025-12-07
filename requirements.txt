@@ -1,0 +1,4 @@
+great_expectations>=1.0.0
+sqlalchemy
+psycopg2-binary
+pandas

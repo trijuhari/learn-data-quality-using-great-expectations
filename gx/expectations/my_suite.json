@@ -1,0 +1,43 @@
+{
+  "expectations": [
+    {
+      "id": "87091f58-2cab-4703-be7c-eef143fea81b",
+      "kwargs": {
+        "value": 1000
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_row_count_to_equal"
+    },
+    {
+      "id": "225e7e2d-a275-43aa-949d-d8b6937c22f5",
+      "kwargs": {
+        "column": "order_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "f28c4fcd-842c-47e0-8a5b-6efe6ec89e88",
+      "kwargs": {
+        "column": "order_status",
+        "value_set": [
+          "PENDING",
+          "SHIPPED",
+          "DELIVERED",
+          "CANCELLED"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    }
+  ],
+  "id": "ada1c536-0cd8-4fce-8b02-ed7434046390",
+  "meta": {
+    "great_expectations_version": "1.9.2"
+  },
+  "name": "my_suite",
+  "notes": null
+}
