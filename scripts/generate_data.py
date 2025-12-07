@@ -1,3 +1,4 @@
+import os
 import random
 from datetime import datetime, timedelta
 
@@ -12,7 +13,10 @@ def generate_timestamp():
     random_date = start_date + timedelta(days=random_number_of_days)
     return random_date.strftime("%Y-%m-%d %H:%M:%S")
 
-with open('seed_data.sql', 'w') as f:
+os.makedirs('sql', exist_ok=True)
+out_path = os.path.join('sql', 'seed_data.sql')
+
+with open(out_path, 'w') as f:
     f.write("INSERT INTO app.order (order_id, customer_order_id, order_status, order_purchase_timestamp) VALUES\n")
     values = []
     for i in range(1000):
@@ -21,8 +25,8 @@ with open('seed_data.sql', 'w') as f:
         status = random.choice(statuses)
         ts = generate_timestamp()
         values.append(f"('{order_id}', '{cust_id}', '{status}', '{ts}')")
-    
+
     f.write(",\n".join(values))
     f.write(";\n")
 
-print("Generated seed_data.sql with 1000 rows.")
+print(f"Generated {out_path} with 1000 rows.")
